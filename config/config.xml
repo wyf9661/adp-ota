@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <input resource="armory">
+        <pkg name="rk3568_sdk_professional_64bit_alpha" organization="publisher" version="2.0.0-2024091106" type="zip" arch="aarch64" platform="SylixOS"/>
+        <pkg name="vsoa" organization="sylixos-middleware" version="1.8.1" type="zip" arch="arm64-generic" platform="SylixOS"/>
+        <pkg name="ecsd-dev" organization="sylixos-middleware" version="0.6.3-20241108" type="tar.gz" arch="arm64-generic" platform="SylixOS"/>
+        <pkg name="jsre-dev" organization="sylixos-middleware" version="2.2.8-20241122" type="tar.gz" arch="arm64-generic" platform="SylixOS"/>
+    </input>
+    <input resource="httpserver">
+<!--         <pkg name="rk3568_SylixOS_ECS_SDK_v3.1.6_rc1_Professional_64bit_20241211" url="http://10.7.0.200:9000/BSP-SDK/rk3568_SylixOS_SDK/rk3568_SylixOS_ECS_SDK_v3.1.6_rc1_Professional_64bit_20241211.zip" version="v3.1.6_rc1" type="zip" /> -->
+        <pkg name="bsprk3568_aio_2024-12-19-08" url="http://10.7.0.200:9000/ECS-SylixOS/bsprk3568_aio_2024-12-19-08.zip" version="2024-12-19-08" type="zip" />
+    </input>
+    <output name="adp-v1.0.0.tar.gz" version="1.0.0" >
+        <product name="bsp3568_1.0.1.tar.gz" version="1.0.1" type="image">
+<!--            <filter depend="rk3568_sdk_professional_64bit_alpha">
+                <file src="images/aio/bsprk3568_aio_x64.bin" des="/boot/bsprk3568_aio_x64.bin" />
+                <file src="images/aio/bsprk3568_aio_x64.dtb" des="/boot/bsprk3568_aio_x64.dtb" />
+                <file src="driver_library/libdrv_linux_compat/Release/strip/linuxcompat.ko" des="/lib/modules/linuxcompat.ko" />
+                <file src="bsp/bsprk3568/SylixOS/driver/usb/arm64/usb64.ko" des="/lib/modules/usb.ko" />
+                <file src="bsp/bsprk3568/SylixOS/driver/usb/arm64/usbdrv_rk3568_64.ko" des="/lib/modules/usbdrv_rk3568_64.ko" />
+            </filter>-->
+            <filter depend="bsprk3568_aio_2024-12-19-08">
+                <dir src="base_result/boot" des="/boot" />
+                <dir src="base_result/etc" des="/etc" />
+                <dir src="base_result/usr" des="/usr" />
+                <dir src="base_result/bin" des="/bin" />
+                <dir src="base_result/lib" des="/lib" />
+                <dir src="base_result/sbin" des="/sbin" />
+            </filter>
+            <filter depend="vsoa">
+                <dir src="apps" des="/apps" />
+                <dir src="lib" des="/lib" />
+                <dir src="sbin" des="/sbin" />
+            </filter>
+            <filter depend="ecsd-dev">
+                <dir src="apps" des="/apps" />
+            </filter>
+            <filter depend="jsre-dev">
+                <dir src="bin" des="/bin" />
+                <dir src="lib" des="/lib" />
+                <dir src="sbin" des="/sbin" />
+            </filter>
+            <rootdir>/</rootdir>
+        </product>
+        <product name="base_aarch64.tar.gz" version="3.6.3" type="base">
+            <filter depend="rk3568_sdk_professional_64bit_alpha">
+                <dir src="base/base_aarch64" des="/" />
+            </filter>
+            <rootdir>/</rootdir>
+        </product>
+<!--        <product name="bsph6_1.0.1.tar.gz" version="1.0.1" type="image">
+            <filter depend="allwinner_sdk_professional_64bit_alpha">
+                <file src="images/aio/bsprk3568_aio_x64.bin" des="/boot/bsprk3568_aio_x64.bin" />
+                <file src="images/aio/bsprk3568_aio_x64.dtb" des="/boot/bsprk3568_aio_x64.dtb" />
+                <file src="bsp/bspallwinnerh6/SylixOS/driver/usb/arm64/usb64.ko" des="/lib/modules/usb.ko" />
+            </filter>
+            <filter depend="vsoa">
+                <dir src="/lib" des="/lib" />
+                <dir src="/bin" des="/bin" />
+            </filter>
+            <filter depend="ecsd">
+                <dir src="/apps" des="/apps" />
+                <dir src="/bin" des="/bin" />
+            </filter>
+            <rootdir>/</rootdir>
+        </product>-->
+    </output>
+</package>
